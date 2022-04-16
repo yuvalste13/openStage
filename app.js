@@ -2,6 +2,7 @@ const express = require("express");
 const https = require("https");
 const request = require("request");
 const bodyParser = require("body-parser");
+var $ = require("jquery");
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -15,9 +16,13 @@ app.get("/",function(req,res){
   res.render("index",{CityList: CityList});
 });
 
-app.post("/",function(req,res){
-  console.log(req.body.button);
-});
+// app.post("/",function(req,res){
+//   var day = req.body.button;
+//   DayList = [day];
+//
+//   res.render("index",{CityList: CityList,DayList: DayList});
+//
+// });
 
 
 

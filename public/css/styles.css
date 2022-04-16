@@ -217,3 +217,11 @@ ul, ol {
   background-position: center center;
   background-size: cover;
 }
+
+.stage-day{
+  visibility: visible;
+}
+
+.sunday ,.monday, .tuesday , .wednesday ,.thursday ,.friday{
+  visibility: visible;
+}
