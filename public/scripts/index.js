@@ -1,19 +1,13 @@
 
 
 
+
+
 function showCard(day){
-  $(".stage-day").css("visibility","hidden");
-  $("div."+day).css("visibility","visible");
-}
-function showAll(){
-  var days = ["sunday","monday","tuesday","wednesday","thursday","friday"];
-  for(var i=0;i<days.length;i++){
-    console.log("test");
-    $("div."+ days[i]).css("visibility","visible");
-  }
+  $(".stage-day").css("display","none");
+  $("div."+ day).css("display","inline");
 }
 
-showAll();
 
 $("button.sunday").on("click",function(event){
   showCard("sunday");

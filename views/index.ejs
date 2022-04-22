@@ -1,156 +1,100 @@
 <%- include("header") -%>
+<%- include("navbar") -%>
 
 
-  <!-- Nav-Bar -->
 
-  <nav class="navbar navbar-expand-lg navbar-dark rounded">
-    <a class="navbar-brand" href="/">OpenBama</a>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample10" aria-controls="navbarsExample10" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample10">
-      <ul class="navbar-nav ms-auto">
-
-        <li class="nav-item dropdown">
-          <form class="" action="/" method="post">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown10" data-bs-toggle="dropdown" aria-expanded="false">Search by Date</a>
-            <ul class="dropdown-menu" aria-labelledby="dropdown10">
-              <!-- Sunday, Monday, Tuesday, Wednesday, Thursday, and Friday -->
-              <li><a class="dropdown-item"><button type="button" class="btn btn-primary btn-lg btn-block btn-light sunday" name="button" value="sunday">Sunday</button></a></li>
-              <li><a class="dropdown-item"><button type="button" class="btn btn-primary btn-lg btn-block btn-light monday" name="button" value="monday">Monday</button></a></li>
-              <li><a class="dropdown-item"><button type="button" class="btn btn-primary btn-lg btn-block btn-light tuesday" name="button" value="tuesday">Tuesday</button></a></li>
-              <li><a class="dropdown-item"><button type="button" class="btn btn-primary btn-lg btn-block btn-light wednesday" name="button" value="wednesday">Wednesday</button></a></li>
-              <li><a class="dropdown-item"><button type="button" class="btn btn-primary btn-lg btn-block btn-light thursday" name="button" value="thursday">Thursday</button></a></li>
-              <li><a class="dropdown-item"><button type="button" class="btn btn-primary btn-lg btn-block btn-light friday" name="button" value="friday">Friday</button></a></li>
-            </ul>
-          </form>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdown10" data-bs-toggle="dropdown" aria-expanded="false">Search by City</a>
-          <ul class="dropdown-menu" aria-labelledby="dropdown10">
-            <% for(var i=0;i< CityList.length;i++){ %>
-            <li><a class="dropdown-item" href="#"><%= CityList[i] %></a></li>
-            <%}%>
-              </ul>
-            </li>
-          </ul>
-
-      </div>
-    </nav>
-
-    <section id="testimonials">
-        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <h2>Title of stage</h2>
-              <img class="testimonials-image" src="https://media.easy.co.il/images/UserThumbs/1696389_1553542655024.jpg" alt="dog-profile">
-              <em>Lorem Ipsum is simply dummy text of the printing </em>
-            </div>
-            <div class="carousel-item">
-              <h2 class="testimonial-text">Title of the stage</h2>
-              <img class="testimonials-image" src="https://media-cdn.tripadvisor.com/media/photo-s/12/9d/9f/17/jack-weekend.jpg" alt="Jack - Ashkelon">
-              <em>ome incarnations of Vishnu such as Matsya, Kurma, Varaha and specially those related to wild boar</em>
-            </div>
-
-          <div class="carousel-item">
-            <h2 class="testimonial-text">Title of the stage</h2>
-            <img class="testimonials-image" src="https://halayla.co.il/wp-content/uploads/2021/07/IMG-20210712-WA0025.jpg" alt="...">
-            <em> incarnations of Vishnu such as Matsya, Kurma, Varaha and perhaps even Nrsimha helped to incorporate certain </em>
-          </div>
-        </div>
-
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-        </div>
-
-  </section>
-<main>
 <section id="pricing">
 
 
+  <!-- <%- include("carousel") -%> -->
+
+
+
+  <div class="container">
+
+    <h2 class="pb-2 border-bottom">במות פתוחות</h2>
+    <div class="float monday stage-day">
+      <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('https://media.easy.co.il/images/UserThumbs/1696389_1553542655024.jpg');">
+        <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+          <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Napopo bar</h2>
+          <ul class="d-flex list-unstyled mt-auto">
+
+            <li class="d-flex align-items-center me-3">
+              <svg class="bi me-2" width="1em" height="1em">
+                <use xlink:href="#geo-fill" />
+              </svg>
+              <small>Ashdod</small>
+            </li>
+            <li class="d-flex align-items-center">
+              <svg class="bi me-2" width="1em" height="1em">
+                <use xlink:href="#calendar3" />
+              </svg>
+              <small>Monday</small>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="float tuesday stage-day">
+      <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('https://media-cdn.tripadvisor.com/media/photo-s/12/9d/9f/17/jack-weekend.jpg');">
+        <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+          <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Jack Bar</h2>
+          <ul class="d-flex list-unstyled mt-auto">
+
+            <li class="d-flex align-items-center me-3">
+              <svg class="bi me-2" width="1em" height="1em">
+                <use xlink:href="#geo-fill" />
+              </svg>
+              <small>Ashkelon</small>
+            </li>
+            <li class="d-flex align-items-center">
+              <svg class="bi me-2" width="1em" height="1em">
+                <use xlink:href="#calendar3" />
+              </svg>
+              <small>Thursday</small>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="float sunday stage-day">
+      <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('https://halayla.co.il/wp-content/uploads/2021/07/IMG-20210712-WA0025.jpg');">
+        <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
+          <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Another longer title belongs here</h2>
+          <ul class="d-flex list-unstyled mt-auto">
+
+            <li class="d-flex align-items-center me-3">
+              <svg class="bi me-2" width="1em" height="1em">
+                <use xlink:href="#geo-fill" />
+              </svg>
+              <small>California</small>
+            </li>
+            <li class="d-flex align-items-center">
+              <svg class="bi me-2" width="1em" height="1em">
+                <use xlink:href="#calendar3" />
+              </svg>
+              <small>5 days</small>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container px-4 py-5" id="custom-cards">
 
 
 
 
-          <div class="container px-4 py-5" id="custom-cards">
-            <h2 class="pb-2 border-bottom">במות פתוחות</h2>
 
+  </div>
 
-            <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-
-              <div class="col stage-card monday stage-day">
-                <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('https://media.easy.co.il/images/UserThumbs/1696389_1553542655024.jpg');">
-                  <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-                    <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Napopo bar</h2>
-                    <ul class="d-flex list-unstyled mt-auto">
-
-                      <li class="d-flex align-items-center me-3">
-                        <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"/></svg>
-                        <small>Ashdod</small>
-                      </li>
-                      <li class="d-flex align-items-center">
-                        <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"/></svg>
-                        <small>Monday</small>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col stage-card tuesday stage-day">
-                <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('https://media-cdn.tripadvisor.com/media/photo-s/12/9d/9f/17/jack-weekend.jpg');">
-                  <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-                    <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Jack Bar</h2>
-                    <ul class="d-flex list-unstyled mt-auto">
-
-                      <li class="d-flex align-items-center me-3">
-                        <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"/></svg>
-                        <small>Ashkelon</small>
-                      </li>
-                      <li class="d-flex align-items-center">
-                        <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"/></svg>
-                        <small>Thursday</small>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col stage-card sunday stage-day">
-                <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('https://halayla.co.il/wp-content/uploads/2021/07/IMG-20210712-WA0025.jpg');">
-                  <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-                    <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Another longer title belongs here</h2>
-                    <ul class="d-flex list-unstyled mt-auto">
-
-                      <li class="d-flex align-items-center me-3">
-                        <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"/></svg>
-                        <small>California</small>
-                      </li>
-                      <li class="d-flex align-items-center">
-                        <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"/></svg>
-                        <small>5 days</small>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-      <script src="scripts/index.js" charset="utf-8"></script>
-
-
-
+  <script src="scripts/index.js" charset="utf-8"></script>
 
 </section>
-  </main>
 
 <%- include("footer") -%>

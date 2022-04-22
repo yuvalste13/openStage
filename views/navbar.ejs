@@ -1,0 +1,39 @@
+
+  <!-- Nav-Bar -->
+
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" id="logo" href="/">OpenBama</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample10" aria-controls="navbarsExample10" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample10">
+      <ul class="navbar-nav ms-auto">
+
+        <li class="nav-item dropdown">
+          <form class="" action="/" method="post">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown10" data-bs-toggle="dropdown" aria-expanded="false">Search by Date</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown10">
+              <!-- Sunday, Monday, Tuesday, Wednesday, Thursday, and Friday -->
+              <li><a class="dropdown-item"><button type="button" class="btn btn-primary btn-lg btn-block btn-light sunday" name="button" value="sunday">Sunday</button></a></li>
+              <li><a class="dropdown-item"><button type="button" class="btn btn-primary btn-lg btn-block btn-light monday" name="button" value="monday">Monday</button></a></li>
+              <li><a class="dropdown-item"><button type="button" class="btn btn-primary btn-lg btn-block btn-light tuesday" name="button" value="tuesday">Tuesday</button></a></li>
+              <li><a class="dropdown-item"><button type="button" class="btn btn-primary btn-lg btn-block btn-light wednesday" name="button" value="wednesday">Wednesday</button></a></li>
+              <li><a class="dropdown-item"><button type="button" class="btn btn-primary btn-lg btn-block btn-light thursday" name="button" value="thursday">Thursday</button></a></li>
+              <li><a class="dropdown-item"><button type="button" class="btn btn-primary btn-lg btn-block btn-light friday" name="button" value="friday">Friday</button></a></li>
+            </ul>
+          </form>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown10" data-bs-toggle="dropdown" aria-expanded="false">Search by City</a>
+          <ul class="dropdown-menu" aria-labelledby="dropdown10">
+            <% for(var i=0;i< CityList.length;i++){ %>
+            <li><a class="dropdown-item" href="#"><%= CityList[i] %></a></li>
+            <%}%>
+              </ul>
+            </li>
+          </ul>
+
+      </div>
+    </nav>

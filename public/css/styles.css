@@ -31,6 +31,7 @@ dl{
 #pricing {
   padding: 100px;
   text-align: center;
+  margin-bottom: 15rem;
 }
 #footer{
   padding: 7% 15%;
@@ -58,6 +59,16 @@ small{
   max-height: 250px;
 
 }
+.carousel-control-next,
+.carousel-control-prev /*, .carousel-indicators */ {
+    filter: invert(100%);
+}
+
+#custom-cards{
+  margin: 7px 7px 7px 7px;
+}
+
+
  .btn-primary {
    background-color: white;
    border-color:white;
@@ -204,6 +215,15 @@ ul, ol {
   font-size: 1.5rem;
   border-radius: .75rem;
 }
+
+.float {
+    float: left;
+    font-weight: bold;
+    width: 25rem;
+    height: 25rem;
+    padding: 10px;
+}
+
 
 .rounded-4 { border-radius: .5rem; }
 .rounded-5 { border-radius: 1rem; }
