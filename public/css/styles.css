@@ -21,17 +21,23 @@ dl{
   text-align: center;
 }
 .navbar {
-    padding-bottom: 4.5rem;
+  padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 .navbar-brand {
-
   font-size: 2.5rem;
   font-weight: bold;
 }
 #pricing {
-  padding: 100px;
+  /* padding: 100px; */
   text-align: center;
-  margin-bottom: 15rem;
+  margin-bottom: 3rem;
+  padding: 7px 0 7px 0;
+}
+#stages{
+  margin-bottom: 3rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 #footer{
   padding: 7% 15%;
@@ -49,7 +55,7 @@ small{
   background-color: #40514e;
 }
 .testimonials-image{
-
+  padding-left: 5rem;
   margin: 20px;
   width: 25%;
 
@@ -58,6 +64,9 @@ small{
   max-width: 30%;
   max-height: 250px;
 
+}
+.carousel-itme{
+  padding-left: 5rem;
 }
 .carousel-control-next,
 .carousel-control-prev /*, .carousel-indicators */ {
@@ -76,6 +85,10 @@ small{
 #testimonials{
 
   text-align: center;
+}
+
+#stages{
+
 }
 #footer{
   padding: 7% 15%;
