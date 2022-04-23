@@ -1,12 +1,12 @@
 
 
-
-
-
 function showCard(day){
+
   $(".stage-day").css("display","none");
-  $("div."+ day).css("display","inline");
+  $("div." + day).css("display","inline");
+
 }
+
 
 
 $("button.sunday").on("click",function(event){

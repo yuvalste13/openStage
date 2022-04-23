@@ -3,6 +3,11 @@ const https = require("https");
 const request = require("request");
 const bodyParser = require("body-parser");
 var $ = require("jquery");
+const stages = require(__dirname + "/stages.js");
+const ld = require("lodash");
+
+
+const stageList = stages.stages;
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -13,7 +18,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 const CityList = ["Ashdod","Ashkelon","beer sheva"];
 
 app.get("/",function(req,res){
-  res.render("index",{CityList: CityList});
+  res.render("index",{CityList: CityList, StageList: stageList});
 });
 
 // app.post("/",function(req,res){

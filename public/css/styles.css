@@ -253,6 +253,7 @@ ul, ol {
 
 .stage-day{
   visibility: visible;
+  margin: 7px;
 }
 
 .sunday ,.monday, .tuesday , .wednesday ,.thursday ,.friday{
