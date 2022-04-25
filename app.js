@@ -21,6 +21,7 @@ app.get("/",function(req,res){
   res.render("index",{CityList: CityList, StageList: stageList});
 });
 
+//listening for a /stages/:stageName for sending the stages info
 app.get("/stages/:stageName",function(req,res){
   const requestedTitle = lodash.lowerCase(req.params.stageName);
   stageList.forEach(function(stage){

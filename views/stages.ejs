@@ -9,11 +9,9 @@
         <div class="col-lg-4 card shadow-lg rounded-5 text-white bg-dark overflow-hidden stage-day card-cover <%= stage.Day %>" style="width: 18rem;">
           <img src="<%= stage.Img %>" class="card-img-top" alt="...">
           <div class="card-body">
-            <h3 calss="card-text"> <%= stage.Name %> </h3>
-            <p class="card-text"> <%= stage.Location %> </p>
-            <p class="card-text"> <%= stage.Day %> </p>
-            <p class="card-text"></p>
-
+            <a href="/stages/<%= stage.Name %>"> <h3 calss="card-text"> <%= stage.Name %> </h3> </a>
+            <a href="/stages/<%= stage.Name %>"> <p class="card-text"> <%= stage.Location %> </p> </a>
+            <a href="/stages/<%= stage.Name %>"> <p class="card-text"> <%= stage.Day %> </p> </a>
           </div>
         </div>
 
