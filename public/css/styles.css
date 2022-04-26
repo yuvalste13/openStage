@@ -302,6 +302,8 @@ ul, ol {
 
 .sunday, .monday, .tuesday, .wednesday, .thursday, .friday {
   visibility: visible;
+  background: transparent;
+
 }
 
 .row {
@@ -466,4 +468,24 @@ ul, ol {
 .pro-d-head {
   font-size: 18px;
   font-weight: 300;
+}
+
+.rank-form{
+  height: 4rem;
+  padding: 15px;
+  text-align: center;
+  align-items: center;
+
+}
+.rank{
+  background: transparent;
+  border: 0;
+  width: 30px;
+  height: 30px;
+}
+
+
+
+.light{
+  color: yellow;
 }

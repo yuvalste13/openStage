@@ -13,20 +13,20 @@
 
         <li class="nav-item dropdown">
           <form class="" action="/" method="post">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown10" data-bs-toggle="dropdown" aria-expanded="false">Search by Date</a>
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown10" data-bs-toggle="dropdown" aria-expanded="false">Filter by Day</a>
             <ul class="dropdown-menu" aria-labelledby="dropdown10">
               <!-- Sunday, Monday, Tuesday, Wednesday, Thursday, and Friday -->
-              <li><a class="dropdown-item"><button type="button" class="btn btn-primary btn-lg btn-block btn-light sunday" name="button" value="sunday">Sunday</button></a></li>
-              <li><a class="dropdown-item"><button type="button" class="btn btn-primary btn-lg btn-block btn-light monday" name="button" value="monday">Monday</button></a></li>
-              <li><a class="dropdown-item"><button type="button" class="btn btn-primary btn-lg btn-block btn-light tuesday" name="button" value="tuesday">Tuesday</button></a></li>
-              <li><a class="dropdown-item"><button type="button" class="btn btn-primary btn-lg btn-block btn-light wednesday" name="button" value="wednesday">Wednesday</button></a></li>
-              <li><a class="dropdown-item"><button type="button" class="btn btn-primary btn-lg btn-block btn-light thursday" name="button" value="thursday">Thursday</button></a></li>
-              <li><a class="dropdown-item"><button type="button" class="btn btn-primary btn-lg btn-block btn-light friday" name="button" value="friday">Friday</button></a></li>
+              <li><a class="dropdown-item"><button type="button" class="btn sunday" name="button" value="sunday">Sunday</button></a></li>
+              <li><a class="dropdown-item"><button type="button" class="btn monday" name="button" value="monday">Monday</button></a></li>
+              <li><a class="dropdown-item"><button type="button" class="btn tuesday" name="button" value="tuesday">Tuesday</button></a></li>
+              <li><a class="dropdown-item"><button type="button" class="btn wednesday" name="button" value="wednesday">Wednesday</button></a></li>
+              <li><a class="dropdown-item"><button type="button" class="btn thursday" name="button" value="thursday">Thursday</button></a></li>
+              <li><a class="dropdown-item"><button type="button" class="btn friday" name="button" value="friday">Friday</button></a></li>
             </ul>
           </form>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdown10" data-bs-toggle="dropdown" aria-expanded="false">Search by City</a>
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown10" data-bs-toggle="dropdown" aria-expanded="false">Filter by Location</a>
           <ul class="dropdown-menu" aria-labelledby="dropdown10">
             <% for(var i=0;i< CityList.length;i++){ %>
             <li><a class="dropdown-item" href="#"><%= CityList[i] %></a></li>
