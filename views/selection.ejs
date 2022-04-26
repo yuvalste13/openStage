@@ -1,52 +1,34 @@
 <%- include("header") -%>
 <%- include("navbar") -%>
-<div class="container bootdey">
-<div class="col-md-12">
-<section class="panel">
-      <div class="panel-body">
-          <div class="col-md-6">
-              <div class="pro-img-details">
-                  <img src="https://via.placeholder.com/550x380/FFB6C1/000000" alt="">
-              </div>
-              <div class="pro-img-list">
-                  <a href="#">
-                      <img src="https://via.placeholder.com/115x100/87CEFA/000000" alt="">
-                  </a>
-                  <a href="#">
-                      <img src="https://via.placeholder.com/115x100/FF7F50/000000" alt="">
-                  </a>
-                  <a href="#">
-                      <img src="https://via.placeholder.com/115x100/20B2AA/000000" alt="">
-                  </a>
-                  <a href="#">
-                      <img src="https://via.placeholder.com/120x100/20B2AA/000000" alt="">
-                  </a>
-              </div>
-          </div>
-          <div class="col-md-6">
-              <h4 class="pro-d-title">
-                  <a href="#" class="">
-                      Leopard Shirt Dress
-                  </a>
-              </h4>
-              <p>
-                  Praesent ac condimentum felis. Nulla at nisl orci, at dignissim dolor, The best product descriptions address your ideal buyer directly and personally. The best product descriptions address your ideal buyer directly and personally.
-              </p>
-              <div class="product_meta">
-                  <span class="posted_in"> <strong>Categories:</strong> <a rel="tag" href="#">Jackets</a>, <a rel="tag" href="#">Men</a>, <a rel="tag" href="#">Shirts</a>, <a rel="tag" href="#">T-shirt</a>.</span>
-                  <span class="tagged_as"><strong>Tags:</strong> <a rel="tag" href="#">mens</a>, <a rel="tag" href="#">womens</a>.</span>
-              </div>
-              <div class="m-bot15"> <strong>Price : </strong> <span class="amount-old">$544</span>  <span class="pro-price"> $300.00</span></div>
-              <div class="form-group">
-                  <label>Quantity</label>
-                  <input type="quantiy" placeholder="1" class="form-control quantity">
-              </div>
-              <p>
-                  <button class="btn btn-round btn-danger" type="button"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
-              </p>
-          </div>
-      </div>
-  </section>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title"> <%= Stage.Name %></h2>
+            <!-- <h6 class="card-subtitle">globe type chair for rest</h6> -->
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-6">
+                    <div class="white-box text-center"><img src="<%= Stage.Img %>" class="img-responsive"></div>
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-6">
+                    <!-- <h4 class="box-title mt-5">Product description</h4> -->
+                    <h4 class="select">city: <%= Stage.Location %></h4>
+                    <h5 class="select">Day: <%= Stage.Day %></h5>
+                    <h5 class="select">Start Time:<%= Stage.startTime %></h5>
+                    <h2 class="mt-5">
+                        $153<small class="text-success">(36%off)</small>
+                    </h2>
+                    <button class="btn btn-dark btn-rounded mr-1" data-toggle="tooltip" title="" data-original-title="Add to cart">
+                        <i class="fa fa-shopping-cart"></i>
+                    </button>
+                    <button class="btn btn-dark btn-rounded">Buy Now</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
   </div>
   </div>
 

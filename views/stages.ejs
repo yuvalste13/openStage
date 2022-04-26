@@ -6,10 +6,10 @@
 
   <% StageList.forEach(function(stage){ %>
 
-        <div class="col-lg-4 card shadow-lg rounded-5 text-white bg-dark overflow-hidden stage-day card-cover <%= stage.Day %>" style="width: 18rem;">
+        <div class="col-lg-4 card1 shadow-lg rounded-5 text-white overflow-hidden stage-day card-cover <%= stage.Day %>" style="width: 18rem;">
           <img src="<%= stage.Img %>" class="card-img-top" alt="...">
           <div class="card-body">
-            <a href="/stages/<%= stage.Name %>"> <h3 calss="card-text"> <%= stage.Name %> </h3> </a>
+            <a href="/stages/<%= stage.Name %>"> <h3 calss="card-text cardName"> <%= stage.Name %> </h3> </a>
             <a href="/stages/<%= stage.Name %>"> <p class="card-text"> <%= stage.Location %> </p> </a>
             <a href="/stages/<%= stage.Name %>"> <p class="card-text"> <%= stage.Day %> </p> </a>
           </div>
