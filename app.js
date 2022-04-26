@@ -5,8 +5,6 @@ const bodyParser = require("body-parser");
 var $ = require("jquery");
 const stages = require(__dirname + "/stages.js");
 const lodash = require("lodash");
-
-
 const app = express();
 app.set('view engine', 'ejs');
 app.use(express.static("public"))
@@ -43,11 +41,6 @@ app.post("/rank",function(req,res){
   for(let i=0 ; i< stageList.length ;i++){
     if (lodash.lowerCase(stageList[i].Name) === stage_name){
       stageList[i].updateRank(parseInt(cur_rank,0));
-
-      console.log(stageList[i].rank , stageList[i].rev);
-
-
-
     }
   }
 

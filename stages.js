@@ -1,5 +1,9 @@
 const day = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
-
+function round(num , dec){
+  // This funtion takes a number and returns the number rounded down
+  // to number of digits after the decimal point (by dec value)
+  return Math.floor(num * Math.pow(10,dec)) / Math.pow(10,dec);
+}
 class stage {
   constructor(name, location, day, startTime, imageLink) {
     this.Name = name;
@@ -7,24 +11,21 @@ class stage {
     this.Day = day;
     this.startTime = startTime;
     this.Img = imageLink;
-    this.rank = -1;
+    this.rank = 0;
     this.rev = 0;
   }
 
   updateRank(rank){
+    // The rank of a stage is the sum of all the ranks every given
+    // divided by the amount of people that ranked
+
     this.rev = this.rev + 1 ;
-    if(this.rank == -1){
-      this.rank = rank;
-    }
-    else{
-      this.rank = (this.rank + rank)/this.rev;
-    }
+    this.rank = this.rank + rank;
 
-
-
+    // returning the current rank for the stage up to a number after
+    // the decimal point
+    return round(this.rank / this.rev , 3)
   }
-
-
 
 }
 
