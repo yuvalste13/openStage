@@ -1,26 +1,26 @@
+<h2 class="Open">במות פתוחות</h2>
+<hr>
+
+
 <div class="row">
 
-  <h2 class="pb-2 border-bottom">במות פתוחות</h2>
+  <% StageList.forEach(function(stage){ %>
 
-  <div class="row">
+  <div class="col-lg-5 card shadow-lg text-center rounded-5 text-white bg-dark overflow-hidden stage-day card-cover <%= stage.Day %>" style="width: 18rem;">
+    <img src="<%= stage.Img %>" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h3 class="card-title"> <%= stage.Name %> </h3>
+      <p class="card-text"> <%= stage.Location %> </p>
+      <p class="card-text"> <%= stage.Day %> </p>
+      <p class="card-text"></p>
 
-    <% StageList.forEach(function(stage){ %>
-
-        <div class="col-lg-4 card shadow-lg rounded-5 text-white bg-dark overflow-hidden stage-day card-cover <%= stage.Day %>" style="width: 18rem;">
-          <img src="<%= stage.Img %>" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h3 calss="card-text"> <%= stage.Name %> </h3>
-            <p class="card-text"> <%= stage.Location %> </p>
-            <p class="card-text"> <%= stage.Day %> </p>
-            <p class="card-text"></p>
-
-          </div>
-        </div>
-
-    <% }); %>
-
-
+    </div>
   </div>
+
+  <% }); %>
+
+</div>
+
 
 
 
