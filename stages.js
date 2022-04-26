@@ -7,18 +7,21 @@ class stage {
     this.Day = day;
     this.startTime = startTime;
     this.Img = imageLink;
-    this.rank = 0;
+    this.rank = -1;
     this.rev = 0;
   }
 
   updateRank(rank){
-    if(this.rank == 0){
+    this.rev = this.rev + 1 ;
+    if(this.rank == -1){
       this.rank = rank;
     }
     else{
-      this.rank = (this.rank + rank)/2;
+      this.rank = (this.rank + rank)/this.rev;
     }
-    this.rev = this.rev + 1 ;
+
+
+
   }
 
 

@@ -16,10 +16,9 @@ h2 {
 .px-wide{
     width: 1000px;
     margin: auto;
-
-
-
-
+}
+.hide{
+  display: none;
 }
 .carousel .item {
   padding: 7% 14%;
