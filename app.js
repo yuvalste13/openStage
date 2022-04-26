@@ -31,6 +31,10 @@ app.get("/stages/:stageName",function(req,res){
   });
 });
 
+app.get("/rank",function(req,res){
+  res.render("rank");
+})
+
 
 // listening to a dinamic port (for using heroku) and on our localhost at port 3000
 app.listen(process.env.PORT || 3000,function(){

@@ -346,6 +346,8 @@ a:hover {
 
 .sunday, .monday, .tuesday, .wednesday, .thursday, .friday {
   visibility: visible;
+  background: transparent;
+
 }
 
 .row {
@@ -382,4 +384,24 @@ a:hover {
 .table-product td{
     border-top: 0px solid #dee2e6 !important;
     color: #728299!important;
+}
+
+.rank-form{
+  height: 4rem;
+  padding: 15px;
+  text-align: center;
+  align-items: center;
+
+}
+.rank{
+  background: transparent;
+  border: 0;
+  width: 30px;
+  height: 30px;
+}
+
+
+
+.light{
+  color: yellow;
 }

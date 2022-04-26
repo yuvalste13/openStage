@@ -13,7 +13,7 @@
 
         <li class="nav-item dropdown">
           <form class="" action="/" method="post">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown10" data-bs-toggle="dropdown" aria-expanded="false">Search by Date</a>
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown10" data-bs-toggle="dropdown" aria-expanded="false">Filter by Day</a>
             <ul class="dropdown-menu" aria-labelledby="dropdown10">
               <!-- Sunday, Monday, Tuesday, Wednesday, Thursday, and Friday -->
               <li><a class="dropdown-item"><button type="button" class="btn day sunday" name="button" value="sunday">Sunday</button></a></li>
@@ -26,7 +26,7 @@
           </form>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdown10" data-bs-toggle="dropdown" aria-expanded="false">Search by City</a>
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown10" data-bs-toggle="dropdown" aria-expanded="false">Filter by Location</a>
           <ul class="dropdown-menu" aria-labelledby="dropdown10">
             <% for(var i=0;i< CityList.length;i++){ %>
             <li><a class="dropdown-item" href="#"><%= CityList[i] %></a></li>
