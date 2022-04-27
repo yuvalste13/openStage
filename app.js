@@ -6,17 +6,23 @@ var $ = require("jquery");
 const stages = require(__dirname + "/stages.js");
 const lodash = require("lodash");
 const app = express();
+var fs = require('fs');
 app.set('view engine', 'ejs');
 app.use(express.static("public"))
 app.use(bodyParser.urlencoded({extended: true}));
 
+// {Name: "Napopo",Location: "Ashdod",Day: "monday",rank:0 ,rev: 0,Img: ""}
 
-const stageList = stages.stages;
+// stageList contains all the javascript objects for the known stages
+// the info comes from the stages.json file
+let stageList = stages.Stage({});
+console.table(stageList);
+
+
 const CityList = ["Ashdod","Ashkelon","beer sheva"];
 
 
 app.get("/",function(req,res){
-
   res.render("index",{CityList: CityList, StageList: stageList});
 });
 
@@ -35,17 +41,32 @@ app.get("/rank",function(req,res){
 })
 app.post("/rank",function(req,res){
   let rank_info = req.body;
-  let cur_rank = rank_info["rank"];
+  let add_rank = rank_info["rank"];
   let stage_name = rank_info["stageName"];
-
-  for(let i=0 ; i< stageList.length ;i++){
-    if (lodash.lowerCase(stageList[i].Name) === stage_name){
-      stageList[i].updateRank(parseInt(cur_rank,0));
-    }
-  }
+  console.table(stages.update(stage_name,stageList,["rank"],[add_rank]));
 
   res.redirect("/");
 
+});
+
+app.get("/:topic",function(req,res){
+  const requestedTitle = lodash.lowerCase(req.params.topic);
+  res.render(requestedTitle,{});
+});
+app.post("/addstage",function(req,res){
+  let info = req.body;
+  console.log(info);
+  stageList = stages.Stage({
+    Name: info.Name,
+    Location: info.Location,
+    Day: info.Day,
+    rank: 0,
+    rev: 0,
+    Img: info.Img
+  });
+  console.table(stageList);
+
+  res.redirect("/addstage");
 });
 
 
