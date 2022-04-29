@@ -74,3 +74,41 @@ function updateStage(stageName,stageList,fields_list,update_data_list){
 }
 
 exports.update = updateStage;
+
+exports.delete = function(stageName){
+
+  let stages = [];
+  try{
+    // read all the stages from the file
+    let rawdata = fs.readFileSync('stages.json');
+    stages = JSON.parse(rawdata);
+  }catch(error){
+
+  }
+
+  for(let i=0 ; i<stages.length ; i++){
+    if(stageName==stages[i].Name){
+      stages.splice(i,1);
+
+    }
+  }
+
+
+    // re-writing the stages.json file
+    fs.writeFile("stages.json",JSON.stringify(stages),"utf8",function(err,results){
+      if(err) console.log("error" , err);
+    });
+
+    return stages;
+
+}
+
+exports.CityList = function(stageList){
+  let citylist = [];
+  for(let i=0 ; i< stageList.length ; i++){
+    citylist.push(stageList[i].Location);
+  }
+  let uniq = [...new Set(citylist)];
+
+  return uniq;
+}

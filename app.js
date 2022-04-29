@@ -11,23 +11,21 @@ app.set('view engine', 'ejs');
 app.use(express.static("public"))
 app.use(bodyParser.urlencoded({extended: true}));
 
-// {Name: "Napopo",Location: "Ashdod",Day: "monday",rank:0 ,rev: 0,Img: ""}
 
 // stageList contains all the javascript objects for the known stages
 // the info comes from the stages.json file
 let stageList = stages.Stage({});
 console.table(stageList);
-
-
-const CityList = ["Ashdod","Ashkelon","beer sheva"];
+// let CityList = ["Ashdod","Ashkelon"];
+CityList = stages.CityList(stageList);
 
 
 app.get("/",function(req,res){
+  CityList = stages.CityList(stageList);
   res.render("index",{CityList: CityList, StageList: stageList});
 });
-
-//listening for a /stages/:stageName for sending the stages info
 app.get("/stages/:stageName",function(req,res){
+  //listening for a /stages/:stageName for sending the stages info
   const requestedTitle = lodash.lowerCase(req.params.stageName);
   stageList.forEach(function(stage){
     if (lodash.lowerCase(stage.Name) === requestedTitle){
@@ -35,10 +33,15 @@ app.get("/stages/:stageName",function(req,res){
     }
   });
 });
-
 app.get("/rank",function(req,res){
   res.render("rank");
 })
+app.get("/:topic",function(req,res){
+  const requestedTitle = lodash.lowerCase(req.params.topic);
+  res.render(requestedTitle,{});
+});
+
+
 app.post("/rank",function(req,res){
   let rank_info = req.body;
   let add_rank = rank_info["rank"];
@@ -47,11 +50,6 @@ app.post("/rank",function(req,res){
 
   res.redirect("/");
 
-});
-
-app.get("/:topic",function(req,res){
-  const requestedTitle = lodash.lowerCase(req.params.topic);
-  res.render(requestedTitle,{});
 });
 app.post("/addstage",function(req,res){
   let info = req.body;
@@ -64,26 +62,40 @@ app.post("/addstage",function(req,res){
     rev: 0,
     Img: info.Img
   });
+  CityList = stages.CityList(stageList);
   console.table(stageList);
 
   res.redirect("/addstage");
 });
-
 app.post("/updatestage",function(req,res){
   let info = req.body;
   let oldStageName = info.NameToUpdate;
-  // console.log(info);
   let field_to_update = ["Name","Location","Day","Img","startTime"];
   let new_values = [info.newName,info.newLocation,info.newDay,info.newImg,info.newstartTime];
 
   stageList = stages.update(oldStageName,stageList,field_to_update,new_values)
+  CityList = stages.CityList(stageList);
   console.table(stageList);
 
   res.redirect("/updatestage");
 
+});
+app.post("/deletestage",function(req,res){
+  let info = req.body;
+  let stage_to_delete = info.Name;
+  let entered_pass = info.Passcode;
+  let ofry_pass = 2419;
+  let yuval_pass = 1924;
 
-
-
+  if(entered_pass==ofry_pass || entered_pass==yuval_pass){
+    stageList = stages.delete(stage_to_delete);
+    CityList = stages.CityList(stageList);
+    console.table(stageList);
+    res.redirect("/");
+  }
+  else{
+    res.redirect("/deletestage");
+  }
 });
 
 
@@ -91,9 +103,3 @@ app.post("/updatestage",function(req,res){
 app.listen(process.env.PORT || 3000,function(){
   console.log("Server is running on port 3000");
 });
-
-
-// mailChimp API key
-// a68463a7095edb0b0fc6fd56c7472d4d-us14
-// List ID
-// 5546f78779
