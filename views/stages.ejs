@@ -1,25 +1,62 @@
-<h2 class="Open">במות פתוחות</h2>
 <hr>
 
 
+
+
 <div class="row">
+  <nav class="navbar navbar-expand-lg navbar-dark">
+
+    <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample10">
+      <ul class="navbar-nav ms-auto">
+
+        <li class="nav-item dropdown">
+          <form class="" action="/" method="post">
+            <a id="drop" class="nav-link dropdown-toggle drop" href="#" id="dropdown10" data-bs-toggle="dropdown" aria-expanded="false">Filter by Day</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown10">
+              <!-- Sunday, Monday, Tuesday, Wednesday, Thursday, and Friday -->
+              <li><a class="dropdown-item"><button type="button" class="btn day sunday" name="button" value="sunday">Sunday</button></a></li>
+              <li><a class="dropdown-item"><button type="button" class="btn day monday" name="button" value="monday">Monday</button></a></li>
+              <li><a class="dropdown-item"><button type="button" class="btn day tuesday" name="button" value="tuesday">Tuesday</button></a></li>
+              <li><a class="dropdown-item"><button type="button" class="btn day wednesday" name="button" value="wednesday">Wednesday</button></a></li>
+              <li><a class="dropdown-item"><button type="button" class="btn day thursday" name="button" value="thursday">Thursday</button></a></li>
+              <li><a class="dropdown-item"><button type="button" class="btn day friday" name="button" value="friday">Friday</button></a></li>
+            </ul>
+          </form>
+        </li>
+        <li class="nav-item dropdown">
+          <a id="drop" class="nav-link dropdown-toggle" href="#" id="dropdown10" data-bs-toggle="dropdown" aria-expanded="false">Filter by Location</a>
+          <ul class="dropdown-menu" aria-labelledby="dropdown10">
+            <% for(var i=0;i< CityList.length;i++){ %>
+            <li><a class="dropdown-item" href="#"><%= CityList[i] %></a></li>
+            <%}%>
+              </ul>
+            </li>
+          </ul>
+
+      </div>
+    </nav>
+
+
 
   <% StageList.forEach(function(stage){ %>
 
-        <div class="col-lg-4 card1 shadow-lg rounded-5 text-white overflow-hidden stage-day card-cover <%= stage.Day %>" style="width: 18rem;">
-          <img src="<%= stage.Img %>" class="card-img-top" alt="...">
-          <div class="card-body">
-            <a href="/stages/<%= stage.Name %>"> <h3 calss="card-text cardName"> <%= stage.Name %> </h3> </a>
-            <a href="/stages/<%= stage.Name %>"> <p class="card-text"> <%= stage.Location %> </p> </a>
-            <a href="/stages/<%= stage.Name %>"> <p class="card-text"> <%= stage.Day %> </p> </a>
-          </div>
-        </div>
+            <div id="card" class="col-lg-4 card1 shadow-lg rounded-5 text-white overflow-hidden stage-day card-cover  <%= stage.Day %>" style="width: 18rem;">
+              <img src="/images/napopo.png" class="card-img-top img-responsive" alt="...">
+              <div class="card-body">
+                <a href="/stages/<%= stage.Name %>">
+                  <h3 calss="card-text cardName"> <%= stage.Name %> </h3>
+                </a>
+                <a href="/stages/<%= stage.Name %>">
+                  <p class="card-text"> <%= stage.Location %> </p>
+                </a>
+                <a href="/stages/<%= stage.Name %>">
+                  <p class="card-text"> <%= stage.Day %> </p>
+                </a>
+              </div>
+            </div>
 
-  <% }); %>
-
-</div>
+            <% }); %>
 
 
-
-
-<script src="scripts/index.js" charset="utf-8"></script>
+    </div>
+    <script src="scripts/index.js" charset="utf-8"></script>

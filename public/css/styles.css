@@ -1,7 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+
+
 html,
 body {
   height: 100%;
-  background-color: #E4F9F5;
+  margin: 0;
+  font-family: 'Open Sans';
 }
 
 i {
@@ -11,15 +16,20 @@ i {
 h2 {
   line-height: 1.5;
   font-size: 2.5rem;
+  font-family: 'Open Sans';
+}
+#cardtitle{
+  color: #c0392b;
+}
+.px-wide {
+  width: 1000px;
+  margin: auto;
+}
 
-}
-.px-wide{
-    width: 1000px;
-    margin: auto;
-}
-.hide{
+.hide {
   display: none;
 }
+
 .carousel .item {
   padding: 7% 14%;
 }
@@ -29,43 +39,41 @@ h2 {
   max-height: 600px;
   padding-bottom: 1rem;
   padding-top: 1rem;
-
 }
-.day{
+
+.day {
   text-align: center;
 }
-  #testimonials{
 
-    text-align: center;
-    display: inline-block;
-    margin: auto;
+#testimonials {
+  text-align: center;
+  display: inline-block;
+  margin: auto;
+}
 
-  }
-
-.cardName{
+.cardName {
   color: white;
 }
 
-.Open{
-  color: #40514e;
+.Open {
+  color: white;
   font-size: 2.5rem;
 }
+
 hr {
   display: block;
   width: 50%;
   margin: 0 auto auto auto;
-
 }
 
 h3 {
   size: 1.5rem;
-  color: black;
+  color: white;
   font-weight: bold;
 }
 
-h5, p ,h4{
+h5, p, h4 {
   text-align: center;
-
 }
 
 dl {
@@ -81,13 +89,15 @@ dl {
   font-size: 2.5rem;
   font-weight: bold;
 }
-.select{
-  color: #40514e;
-}
-.card1{
-  background-color: #40514e;
 
+.select {
+  color: black;
 }
+
+.card1 {
+  background-color: black;
+}
+
 #pricing {
   /* padding: 100px; */
   text-align: center;
@@ -116,12 +126,9 @@ small {
 }
 
 .navbar-dark {
-  background-color: #40514e;
+  background-color: white;
+  display: inline-inline-block;
 }
-
-
-
-
 
 .carousel-itme {
   padding-left: 5rem;
@@ -148,12 +155,10 @@ small {
   text-align: center;
 }
 
-
-
 #footer {
   padding: 7% 15%;
   text-align: center;
-  background-color: #40514e;
+  background-color: black;
   font-style: italic;
   color: white;
 }
@@ -209,22 +214,35 @@ small {
   visibility: visible;
 }
 
+#drop {
+  color: black;
+}
+
+#card {
+  background-color: black;
+}
+
 ul, ol {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-a{
-  color: black;
-  text-decoration: none;
-}
-a:hover {
+
+a {
   color: white;
   text-decoration: none;
+  font-family: 'Open Sans';
 }
-.card{
-  background-color: #40514e;
+
+a:hover {
+  color: red;
+  text-decoration: none;
 }
+
+.card {
+  background-color: black;
+}
+
 .social-inner {
   display: flex;
   flex-direction: column;
@@ -312,6 +330,10 @@ a:hover {
   padding: 10px;
 }
 
+.img-responsive {
+  border-radius: 100px;
+}
+
 .rounded-4 {
   border-radius: .5rem;
 }
@@ -346,61 +368,73 @@ a:hover {
 .sunday, .monday, .tuesday, .wednesday, .thursday, .friday {
   visibility: visible;
   background: transparent;
-
 }
 
 .row {
   padding-left: 100px;
   text-align: center;
 }
-
 }
+
+#card-title {
+  font-weight: bold;
+}
+
 .card {
-    margin-bottom: 30px;
+  color: black;
+  margin-bottom: 30px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: white;
+  font-family: 'Open Sans', sans-serif;
+  background-clip: border-box;
+  border: 0 solid transparent;
+  border-radius: 0;
 }
-.card {
-    color: #40514e;
 
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #E4F9F5;
-
-    background-clip: border-box;
-    border: 0 solid transparent;
-    border-radius: 0;
-}
 .card .card-subtitle {
-    font-weight: 300;
-    margin-bottom: 10px;
-    color: #8898aa;
-}
-.table-product.table-striped tbody tr:nth-of-type(odd) {
-    background-color: #f3f8fa!important
-}
-.table-product td{
-    border-top: 0px solid #dee2e6 !important;
-    color: #728299!important;
+  font-weight: 300;
+  margin-bottom: 10px;
+  color: #8898aa;
 }
 
-.rank-form{
+.table-product.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f3f8fa !important
+}
+
+.table-product td {
+  border-top: 0px solid #dee2e6 !important;
+  color: #728299 !important;
+}
+
+.rank-form {
   height: 4rem;
   padding: 15px;
   text-align: center;
   align-items: center;
-
 }
-.rank{
+
+.rank {
   background: transparent;
   border: 0;
   width: 30px;
   height: 30px;
 }
 
+#rank1 {
+  position: absolute;
+  margin-left: 400px;
+  margin-bottom: 0;
+  padding: 15px;
+  height: 4rem;
+  float: left;
+  font-family: 'Open Sans', sans-serif;
+  color: black;
+}
 
-
-.light{
-  color: yellow;
+.light {
+  color: #F0A500;
 }

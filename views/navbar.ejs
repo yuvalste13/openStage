@@ -1,39 +1,42 @@
+<link href="/css/styles1.css" rel="stylesheet">
 
-  <!-- Nav-Bar -->
 
-  <nav class="navbar navbar-expand-lg navbar-dark">
-    <a class="navbar-brand" id="logo" href="/">OpenBama</a>
+<!-- nav-bar2 -->
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample10" aria-controls="navbarsExample10" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="nav">
+  <div class="container">
+    <h1 class="logo"><a href="/">OpenStage</a></h1>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#stages">Stages</a></li>
+      <li><a href="#footer">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="hero">
+  <div class="container">
+    <h1>Welcome To My Website</h1>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores, consequuntur?</p>
+  </div>
+</div>
 
-    <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample10">
-      <ul class="navbar-nav ms-auto">
+<section class="container content">
+  <h2>Content One</h2>
+  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione dolorem voluptates eveniet tempora ut cupiditate magnam, sapiente, hic quo in ipsum iste soluta eaque perferendis nihil recusandae dolore officia aperiam corporis similique.
+    Facilis quos tempore labore totam! Consectetur molestiae iusto ducimus error reiciendis aspernatur dolor, modi dolorem sit architecto, voluptate magni sunt unde est quas? Voluptates a dolorum voluptatum quo perferendis aut sit. Aspernatur libero
+    laboriosam ab eligendi omnis delectus earum labore, placeat officiis sint illum rem voluptas ipsum repellendus iste eius recusandae quae excepturi facere, iure rerum sequi? Illum velit delectus dicta et iste dolorum obcaecati minus odio eligendi!
+  </p>
 
-        <li class="nav-item dropdown">
-          <form class="" action="/" method="post">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown10" data-bs-toggle="dropdown" aria-expanded="false">Filter by Day</a>
-            <ul class="dropdown-menu" aria-labelledby="dropdown10">
-              <!-- Sunday, Monday, Tuesday, Wednesday, Thursday, and Friday -->
-              <li><a class="dropdown-item"><button type="button" class="btn day sunday" name="button" value="sunday">Sunday</button></a></li>
-              <li><a class="dropdown-item"><button type="button" class="btn day monday" name="button" value="monday">Monday</button></a></li>
-              <li><a class="dropdown-item"><button type="button" class="btn day tuesday" name="button" value="tuesday">Tuesday</button></a></li>
-              <li><a class="dropdown-item"><button type="button" class="btn day wednesday" name="button" value="wednesday">Wednesday</button></a></li>
-              <li><a class="dropdown-item"><button type="button" class="btn day thursday" name="button" value="thursday">Thursday</button></a></li>
-              <li><a class="dropdown-item"><button type="button" class="btn day friday" name="button" value="friday">Friday</button></a></li>
-            </ul>
-          </form>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdown10" data-bs-toggle="dropdown" aria-expanded="false">Filter by Location</a>
-          <ul class="dropdown-menu" aria-labelledby="dropdown10">
-            <% for(var i=0;i< CityList.length;i++){ %>
-            <li><a class="dropdown-item" href="#"><%= CityList[i] %></a></li>
-            <%}%>
-              </ul>
-            </li>
-          </ul>
+</section>
 
-      </div>
-    </nav>
+
+
+
+
+
+
+
+
+
+<script src="/scripts/navbar.js" charset="utf-8"></script>
