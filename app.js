@@ -75,7 +75,7 @@ app.post("/updatestage",function(req,res){
   // console.log(info);
   let field_to_update = ["Name","Location","Day","Img","startTime"];
   let new_values = [info.newName,info.newLocation,info.newDay,info.newImg,info.newstartTime];
-  
+
   stageList = stages.update(oldStageName,stageList,field_to_update,new_values)
   console.table(stageList);
 
