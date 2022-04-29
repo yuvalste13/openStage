@@ -40,6 +40,16 @@ function updateStage(stageName,stageList,fields_list,update_data_list){
     for(let i=0 ; i < stageList.length ; i++){
       if(stageName == stageList[i].Name){
         for(let j =0 ; j < fields_list.length ; j++){
+          if(update_data_list[j]==""){
+            continue;
+          }
+          if(update_data_list[j]=="delete"){
+            update_data_list[j] = "";
+          }
+          if(update_data_list[j]=="zero"){
+            update_data_list[j] = 0;
+          }
+
           if(fields_list[j]=="rank"){
             stageList[i][fields_list[j]] += parseInt(update_data_list[j]);
             stageList[i]["rev"] += 1;

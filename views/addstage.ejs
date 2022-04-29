@@ -1,11 +1,16 @@
 <%- include("header") -%>
 
 
-
 <form class="" action="/addstage" method="post">
+  <h5>Stage Name: </h5>
   <input type="text" name="Name" placeholder="Name" autocomplete="false">
+  <h5>Location: </h5>
   <input type="text" name="Location" placeholder="Location" autocomplete="false">
+  <h5>Day: </h5>
   <input type="text" name="Day" placeholder="Day" autocomplete="false">
+  <h5>Start at: </h5>
+  <input type="text" name="startTime" placeholder="00:00" autocomplete="false">
+  <h5>Image Source: </h5>
   <input type="text" name="Img" placeholder="Img" autocomplete="false">
   <button class="btn" type="submit" placeholder="button">Add</button>
 </form>

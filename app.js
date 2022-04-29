@@ -55,11 +55,11 @@ app.get("/:topic",function(req,res){
 });
 app.post("/addstage",function(req,res){
   let info = req.body;
-  console.log(info);
   stageList = stages.Stage({
     Name: info.Name,
     Location: info.Location,
     Day: info.Day,
+    startTime: info.startTime,
     rank: 0,
     rev: 0,
     Img: info.Img
@@ -67,6 +67,23 @@ app.post("/addstage",function(req,res){
   console.table(stageList);
 
   res.redirect("/addstage");
+});
+
+app.post("/updatestage",function(req,res){
+  let info = req.body;
+  let oldStageName = info.NameToUpdate;
+  // console.log(info);
+  let field_to_update = ["Name","Location","Day","Img","startTime"];
+  let new_values = [info.newName,info.newLocation,info.newDay,info.newImg,info.newstartTime];
+  
+  stageList = stages.update(oldStageName,stageList,field_to_update,new_values)
+  console.table(stageList);
+
+  res.redirect("/updatestage");
+
+
+
+
 });
 
 

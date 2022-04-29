@@ -1,0 +1,21 @@
+<%- include("header") -%>
+
+
+<form class="" action="/updatestage" method="post">
+  <h5>Stage Name to update: </h5>
+  <input type="text" name="NameToUpdate" placeholder="Name" autocomplete="false">
+  <h5>New Stage Name: </h5>
+  <input type="text" name="newName" placeholder="Name" autocomplete="false">
+  <h5>New  Location: </h5>
+  <input type="text" name="newLocation" placeholder="Location" autocomplete="false">
+  <h5>New  Day: </h5>
+  <input type="text" name="newDay" placeholder="Day" autocomplete="false">
+  <h5>New Start Time: </h5>
+  <input type="text" name="newstartTime" placeholder="00:00" autocomplete="false">
+  <h5>New Image Source: </h5>
+  <input type="text" name="newImg" placeholder="Img" autocomplete="false">
+  <button class="btn" type="submit" placeholder="button">Add</button>
+</form>
+
+
+<%- include("footer") -%>
