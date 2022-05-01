@@ -6,6 +6,7 @@ let buttons = [];
 // finding all the buttons with an id of a number
 for(let i=0 ; i<5 ; i++){
   buttons.push(document.querySelector("#" + button_names[i]));
+  buttons[i].classList.add("Ran");
 }
 
 // creating an event listener for each button
