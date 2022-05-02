@@ -12,6 +12,7 @@ body {
   padding-bottom: 50px;
 }
 
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -19,11 +20,14 @@ body {
 
 .nav {
   position: fixed;
+  z-index: 3;
   background-color: #222;
   top: 0;
   left: 0;
   right: 0;
   transition: all 0.3s ease-in-out;
+
+
 }
 
 .nav .container {

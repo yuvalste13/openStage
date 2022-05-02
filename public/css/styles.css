@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
-
-
 html,
 body {
   height: 100%;
@@ -18,9 +16,11 @@ h2 {
   font-size: 2.5rem;
   font-family: 'Open Sans';
 }
-#cardtitle{
+
+#cardtitle {
   color: #c0392b;
 }
+
 .px-wide {
   width: 1000px;
   margin: auto;
@@ -32,13 +32,6 @@ h2 {
 
 .carousel .item {
   padding: 7% 14%;
-}
-
-.carousel-item img {
-  width: 100%;
-  max-height: 600px;
-  padding-bottom: 1rem;
-  padding-top: 1rem;
 }
 
 .day {
@@ -128,18 +121,6 @@ small {
 .navbar-dark {
   background-color: white;
   display: inline-inline-block;
-}
-
-.carousel-itme {
-  padding-left: 5rem;
-}
-
-.carousel-control-next,
-.carousel-control-prev
-
-/*, .carousel-indicators */
-  {
-  filter: invert(100%);
 }
 
 #custom-cards {
@@ -373,7 +354,7 @@ a:hover {
 .row {
   padding-left: 100px;
   text-align: center;
-}
+
 }
 
 #card-title {
@@ -383,7 +364,8 @@ a:hover {
 .card {
   color: black;
   margin-bottom: 30px;
-  position: relative;
+  z-index: 1;
+
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -420,8 +402,14 @@ a:hover {
 .rank {
   background: transparent;
   border: 0;
+  color: black;
   width: 30px;
   height: 30px;
+}
+
+
+#row1 {
+z-index: 1;
 }
 
 #rank1 {
@@ -434,7 +422,9 @@ a:hover {
   font-family: 'Open Sans', sans-serif;
   color: black;
 }
-
+.Ran{
+  color: black;
+}
 .light {
   color: #F0A500;
 }
