@@ -3,26 +3,74 @@ const https = require("https");
 const request = require("request");
 const bodyParser = require("body-parser");
 var $ = require("jquery");
-const stages = require(__dirname + "/stages.js");
+// const stages = require(__dirname + "/stages.js");
 const lodash = require("lodash");
 const app = express();
 var fs = require('fs');
 app.set('view engine', 'ejs');
 app.use(express.static("public"))
 app.use(bodyParser.urlencoded({extended: true}));
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/stagesDB');
 
+
+const stageSchema = new mongoose.Schema({
+  Name: {
+    type: String,
+    required: [true, 'No stage name given']
+  },
+  rank:{
+    type: Number,
+    min: 0,
+    max: 5
+  },
+  rev: {
+    type: Number
+  },
+  Location: {
+    type: String
+  },
+  Img: {
+    type: String
+  },
+  Day: String,
+  startTime: {
+    type: String
+  },
+  comments: [
+    {
+      Name: String,
+      commentBody: String,
+      Date: Date
+    }
+  ]
+
+
+});
+const Stage = mongoose.model('Stage',stageSchema);
 
 // stageList contains all the javascript objects for the known stages
 // the info comes from the stages.json file
-let stageList = stages.Stage({});
-console.table(stageList);
-// let CityList = ["Ashdod","Ashkelon"];
-CityList = stages.CityList(stageList);
+let stageList = [];
+// console.table(stageList);
+let CityList = ["Ashdod","Ashkelon"];
+// CityList = stages.CityList(stageList);
 
 
 app.get("/",function(req,res){
-  CityList = stages.CityList(stageList);
-  res.render("index",{CityList: CityList, StageList: stageList});
+  Stage.find(function(err,stages){
+    if(err){
+      console.log(err);
+    }
+    else{
+      stages.forEach(function(stage){
+        console.log(stage.Name);
+      })
+      res.render("index",{CityList: CityList, StageList: stages});
+    }
+  });
+
+
 });
 app.get("/stages/:stageName",function(req,res){
   //listening for a /stages/:stageName for sending the stages info
@@ -53,7 +101,7 @@ app.post("/rank",function(req,res){
 });
 app.post("/addstage",function(req,res){
   let info = req.body;
-  stageList = stages.Stage({
+  let new_stage = new Stage({
     Name: info.Name,
     Location: info.Location,
     Day: info.Day,
@@ -62,20 +110,19 @@ app.post("/addstage",function(req,res){
     rev: 0,
     Img: info.Img
   });
-  CityList = stages.CityList(stageList);
-  console.table(stageList);
+  new_stage.save();
 
   res.redirect("/addstage");
 });
 app.post("/updatestage",function(req,res){
-  let info = req.body;
-  let oldStageName = info.NameToUpdate;
-  let field_to_update = ["Name","Location","Day","Img","startTime"];
-  let new_values = [info.newName,info.newLocation,info.newDay,info.newImg,info.newstartTime];
-
-  stageList = stages.update(oldStageName,stageList,field_to_update,new_values)
-  CityList = stages.CityList(stageList);
-  console.table(stageList);
+  // let info = req.body;
+  // let oldStageName = info.NameToUpdate;
+  // let field_to_update = ["Name","Location","Day","Img","startTime"];
+  // let new_values = [info.newName,info.newLocation,info.newDay,info.newImg,info.newstartTime];
+  //
+  // stageList = stages.update(oldStageName,stageList,field_to_update,new_values)
+  //
+  // console.table(stageList);
 
   res.redirect("/updatestage");
 

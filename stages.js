@@ -1,4 +1,45 @@
 var fs = require('fs');
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/stagesDB');
+
+
+const stageSchema = new mongoose.Schema({
+  Name: {
+    type: String,
+    required: [true, 'No stage name given']
+  },
+  rank:{
+    type: Number,
+    min: 0,
+    max: 5
+  },
+  rev: {
+    type: Number
+  },
+  Location: {
+    type: String
+  },
+  Img: {
+    type: String
+  },
+  Day: String,
+  startTime: {
+    type: String
+  },
+  comments: [
+    {
+      Name: String,
+      commentBody: String,
+      Date: Date
+    }
+  ]
+
+
+});
+const Stage = mongoose.model('Stage',stageSchema);
+let stageList = [];
+
+
 
 const day = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 function round(num , dec){
@@ -7,108 +48,29 @@ function round(num , dec){
   return Math.floor(num * Math.pow(10,dec)) / Math.pow(10,dec);
 }
 
+// exports.StageList =
+function saveStage(new_stage_object){
 
-exports.Stage = function(new_stageObject){
-  let stages = [];
-  try{
-    // read all the stages from the file
-    let rawdata = fs.readFileSync('stages.json');
-    stages = JSON.parse(rawdata);
-  }catch(error){
-
-  }
-
-  // adding the new stage at the end
-  if(new_stageObject.Name==undefined || new_stageObject.Name == ""){
-
-  }else{
-    stages.push(new_stageObject);
-  }
+  new_stage = new Stage(new_stage_object);
+  new_stage.save();
 
 
-
-  // re-writing the stages.json file
-  fs.writeFile("stages.json",JSON.stringify(stages),"utf8",function(err,results){
-    if(err) console.log("error" , err);
-  });
-
-  return stages;
 };
 
-function updateStage(stageName,stageList,fields_list,update_data_list){
 
-    for(let i=0 ; i < stageList.length ; i++){
-      if(stageName == stageList[i].Name){
-        for(let j =0 ; j < fields_list.length ; j++){
-          if(update_data_list[j]==""){
-            continue;
-          }
-          if(update_data_list[j]=="delete"){
-            update_data_list[j] = "";
-          }
-          if(update_data_list[j]=="zero"){
-            update_data_list[j] = 0;
-          }
-
-          if(fields_list[j]=="rank"){
-            stageList[i][fields_list[j]] += parseInt(update_data_list[j]);
-            stageList[i]["rev"] += 1;
-          }else{
-            stageList[i][fields_list[j]] = update_data_list[j];
-          }
-        }
-
-
-
-      }
+function show(){
+  Stage.find(function(err,stages){
+    if(err){
+      console.log(err);
     }
-
-      // re-writing the stages.json file
-      fs.writeFile("stages.json",JSON.stringify(stageList),"utf8",function(err,results){
-        if(err) console.log("error" , err);
+    else{
+      stages.forEach(function(stage){
+        console.log(stage.Name);
       });
-
-
-      return stageList;
-
-}
-
-exports.update = updateStage;
-
-exports.delete = function(stageName){
-
-  let stages = [];
-  try{
-    // read all the stages from the file
-    let rawdata = fs.readFileSync('stages.json');
-    stages = JSON.parse(rawdata);
-  }catch(error){
-
-  }
-
-  for(let i=0 ; i<stages.length ; i++){
-    if(stageName==stages[i].Name){
-      stages.splice(i,1);
-
     }
-  }
-
-
-    // re-writing the stages.json file
-    fs.writeFile("stages.json",JSON.stringify(stages),"utf8",function(err,results){
-      if(err) console.log("error" , err);
-    });
-
-    return stages;
-
+  });
 }
 
-exports.CityList = function(stageList){
-  let citylist = [];
-  for(let i=0 ; i< stageList.length ; i++){
-    citylist.push(stageList[i].Location);
-  }
-  let uniq = [...new Set(citylist)];
+stageList = show();
 
-  return uniq;
-}
+exports.stageList = stageList;
