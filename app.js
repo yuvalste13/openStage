@@ -3,7 +3,6 @@ const https = require("https");
 const request = require("request");
 const bodyParser = require("body-parser");
 var $ = require("jquery");
-// const stages = require(__dirname + "/stages.js");
 const lodash = require("lodash");
 const app = express();
 var fs = require('fs');
@@ -11,7 +10,9 @@ app.set('view engine', 'ejs');
 app.use(express.static("public"))
 app.use(bodyParser.urlencoded({extended: true}));
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/stagesDB');
+
+
+mongoose.connect('mongodb+srv://admin-ofry:OfrY218790@stagecluster.8sdmq.mongodb.net/stagesDB');
 
 function isNotEmpty(str){
   if(str == ''){
@@ -77,11 +78,25 @@ app.get("/",function(req,res){
 app.get("/stages/:stageName",function(req,res){
   //listening for a /stages/:stageName for sending the stages info
   const requestedTitle = lodash.lowerCase(req.params.stageName);
-  stageList.forEach(function(stage){
-    if (lodash.lowerCase(stage.Name) === requestedTitle){
-      res.render("selection",{CityList: CityList, StageList: stageList ,Stage: stage});
+  console.log(requestedTitle);
+  Stage.find(function(err,stages){
+    if(err){
+      console.log(err);
+      res.redirect('/');
     }
+    else{
+      stages.forEach(function(stage){
+        if(stage.Name == requestedTitle){
+            res.render("selection",{Stage: stage});
+        }
+      })
+
+
+    }
+
+
   });
+
 });
 app.get("/rank",function(req,res){
   res.render("rank");
@@ -101,10 +116,10 @@ app.get("/:topic",function(req,res){
 
 
 app.post("/rank",function(req,res){
-  let rank_info = req.body;
-  let add_rank = rank_info["rank"];
-  let stage_name = rank_info["stageName"];
-  console.table(stages.update(stage_name,stageList,["rank"],[add_rank]));
+  let info = req.body;
+  Stage.updateOne({Name: info.stageName} , {"$inc" : {rank: info.rank , rev: 1}} , function(err){
+    if(err){console.log(err);}
+  })
 
   res.redirect("/");
 
@@ -160,7 +175,7 @@ app.post("/deletestage",function(req,res){
       if(err) console.log(err)
       else console.log('Stage ' + info.Name + ' deleted');
     });
-    res.redirect("/");
+    res.redirect("/deletestage");
   }
   else{
     res.redirect("/deletestage");
