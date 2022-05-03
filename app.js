@@ -13,7 +13,12 @@ app.use(bodyParser.urlencoded({extended: true}));
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/stagesDB');
 
-
+function isNotEmpty(str){
+  if(str == ''){
+    return false;
+  }
+  return true;
+}
 const stageSchema = new mongoose.Schema({
   Name: {
     type: String,
@@ -63,9 +68,6 @@ app.get("/",function(req,res){
       console.log(err);
     }
     else{
-      stages.forEach(function(stage){
-        console.log(stage.Name);
-      })
       res.render("index",{CityList: CityList, StageList: stages});
     }
   });
@@ -86,7 +88,15 @@ app.get("/rank",function(req,res){
 })
 app.get("/:topic",function(req,res){
   const requestedTitle = lodash.lowerCase(req.params.topic);
-  res.render(requestedTitle,{});
+  Stage.find(function(err,stages){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render(requestedTitle,{Stages: stages});
+    }
+  })
+
 });
 
 
@@ -115,14 +125,23 @@ app.post("/addstage",function(req,res){
   res.redirect("/addstage");
 });
 app.post("/updatestage",function(req,res){
-  // let info = req.body;
-  // let oldStageName = info.NameToUpdate;
-  // let field_to_update = ["Name","Location","Day","Img","startTime"];
-  // let new_values = [info.newName,info.newLocation,info.newDay,info.newImg,info.newstartTime];
-  //
-  // stageList = stages.update(oldStageName,stageList,field_to_update,new_values)
-  //
-  // console.table(stageList);
+  let info = req.body;
+  let u_stage = {};
+  let oldStageName = info.NameToUpdate;
+  let new_values = [info.newName,info.newLocation,info.newDay,info.newImg,info.newstartTime];
+
+  // checking is one of the given values is empty. if it does, dont add them
+  if(isNotEmpty(info.newName)){ u_stage = {...u_stage,Name:info.newName};}
+  if(isNotEmpty(info.newName)){ u_stage = {...u_stage,Location:info.newLocation};}
+  if(isNotEmpty(info.newDay)){ u_stage = {...u_stage,Day:info.newDay};}
+  if(isNotEmpty(info.newImg)){ u_stage = {...u_stage,Img:info.newImg};}
+  if(isNotEmpty(info.newstartTime)){ u_stage = {...u_stage,startTime:info.newstartTime};}
+
+  // update the stage
+  Stage.updateOne({Name: oldStageName},{"$set": u_stage},function(err){
+    if(err) console.log(err);
+    else console.log('Stage ' + info.NameToUpdate + ' updated');
+  });
 
   res.redirect("/updatestage");
 
@@ -134,10 +153,13 @@ app.post("/deletestage",function(req,res){
   let ofry_pass = 2419;
   let yuval_pass = 1924;
 
+  // check for permission
   if(entered_pass==ofry_pass || entered_pass==yuval_pass){
-    stageList = stages.delete(stage_to_delete);
-    CityList = stages.CityList(stageList);
-    console.table(stageList);
+    // delete the stage
+    Stage.deleteOne({Name: info.Name}, function(err){
+      if(err) console.log(err)
+      else console.log('Stage ' + info.Name + ' deleted');
+    });
     res.redirect("/");
   }
   else{
