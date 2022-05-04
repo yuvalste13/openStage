@@ -6,17 +6,20 @@ var $ = require("jquery");
 const lodash = require("lodash");
 const app = express();
 const stagesDB = require(__dirname + '/stages.js');
+const geocoder = require(__dirname + '/geocoder.js');
 var fs = require('fs');
 app.set('view engine', 'ejs');
 app.use(express.static("public"))
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 const mongoose = require('mongoose');
 
 
 mongoose.connect(stagesDB.stages);
 
-function isNotEmpty(str){
-  if(str == ''){
+function isNotEmpty(str) {
+  if (str == '') {
     return false;
   }
   return true;
@@ -26,7 +29,7 @@ const stageSchema = new mongoose.Schema({
     type: String,
     required: [true, 'No stage name given']
   },
-  rank:{
+  rank: {
     type: Number,
     min: 0,
     max: 5
@@ -45,84 +48,113 @@ const stageSchema = new mongoose.Schema({
   startTime: {
     type: String
   },
-  comments: [
-    {
-      Name: String,
-      commentBody: String,
-      Date: Date
-    }
-  ]
+  comments: [{
+    Name: String,
+    commentBody: String,
+    Date: Date
+  }]
 
 
 });
-const Stage = mongoose.model('Stage',stageSchema);
+const Stage = mongoose.model('Stage', stageSchema);
 
 
-let CityList = ["Ashdod","Ashkelon"];
+let CityList = ["Ashdod", "Ashkelon"];
 
 
 
-app.get("/",function(req,res){
-  Stage.find(function(err,stages){
-    if(err){
+app.get("/", function(req, res) {
+
+
+
+  Stage.find(function(err, stages) {
+    if (err) {
       console.log(err);
+    } else {
+      res.render("index", {
+        CityList: CityList,
+        StageList: stages
+      });
     }
-    else{
-      res.render("index",{CityList: CityList, StageList: stages});
-    }
+
   });
-
-
 });
+
+
+
+
 app.get("/stages/:stageName",function(req,res){
-  //listening for a /stages/:stageName for sending the stages info
   const requestedTitle = lodash.lowerCase(req.params.stageName);
+  let coord;
+  let weaterData;
+  let query = 'London';
+  const apiKey = "c0d8f4929cdcdf553d6e9298178ae058"
+  const units = "metric"
+  const url = "https://api.openweathermap.org/data/2.5/weather?q=" + query + "&appid=" + apiKey + "&units=" + units;
+
   Stage.find(function(err,stages){
-    if(err){
-      console.log(err);
-      res.redirect('/');
+    if(err){console.log(err);
     }
     else{
       stages.forEach(function(stage){
-        if(lodash.lowerCase(stage.Name) == requestedTitle){
-            res.render("selection",{Stage: stage});
+        if (lodash.lowerCase(stage.Name) == requestedTitle){
+          https.get(url , function(response){
+            response.on("data",function(data){
+              weaterData = JSON.parse(data);
+              coord = weaterData.coord;
+              res.render("selection",{Stage: stage, Coord: coord});
+            })
+
+          });
         }
       })
-
-
     }
-
-
   });
 
+
+
 });
-app.get("/rank",function(req,res){
+
+
+
+
+app.get("/rank", function(req, res) {
   res.render("rank");
 })
-app.get("/:topic",function(req,res){
+app.get("/:topic", function(req, res) {
   const requestedTitle = lodash.lowerCase(req.params.topic);
-  Stage.find(function(err,stages){
-    if(err){
+  Stage.find(function(err, stages) {
+    if (err) {
       console.log(err);
-    }
-    else{
-      res.render(requestedTitle,{Stages: stages});
+    } else {
+      res.render(requestedTitle, {
+        Stages: stages
+      });
     }
   })
 
 });
 
 
-app.post("/rank",function(req,res){
+app.post("/rank", function(req, res) {
   let info = req.body;
-  Stage.updateOne({Name: info.stageName} , {"$inc" : {rank: info.rank , rev: 1}} , function(err){
-    if(err){console.log(err);}
+  Stage.updateOne({
+    Name: info.stageName
+  }, {
+    "$inc": {
+      rank: info.rank,
+      rev: 1
+    }
+  }, function(err) {
+    if (err) {
+      console.log(err);
+    }
   })
 
   res.redirect("/");
 
 });
-app.post("/addstage",function(req,res){
+app.post("/addstage", function(req, res) {
   let info = req.body;
   let new_stage = new Stage({
     Name: info.Name,
@@ -137,29 +169,58 @@ app.post("/addstage",function(req,res){
 
   res.redirect("/addstage");
 });
-app.post("/updatestage",function(req,res){
+app.post("/updatestage", function(req, res) {
   let info = req.body;
   let u_stage = {};
   let oldStageName = info.NameToUpdate;
-  let new_values = [info.newName,info.newLocation,info.newDay,info.newImg,info.newstartTime];
+  let new_values = [info.newName, info.newLocation, info.newDay, info.newImg, info.newstartTime];
 
   // checking is one of the given values is empty. if it does, dont add them
-  if(isNotEmpty(info.newName)){ u_stage = {...u_stage,Name:info.newName};}
-  if(isNotEmpty(info.newName)){ u_stage = {...u_stage,Location:info.newLocation};}
-  if(isNotEmpty(info.newDay)){ u_stage = {...u_stage,Day:info.newDay};}
-  if(isNotEmpty(info.newImg)){ u_stage = {...u_stage,Img:info.newImg};}
-  if(isNotEmpty(info.newstartTime)){ u_stage = {...u_stage,startTime:info.newstartTime};}
+  if (isNotEmpty(info.newName)) {
+    u_stage = {
+      ...u_stage,
+      Name: info.newName
+    };
+  }
+  if (isNotEmpty(info.newName)) {
+    u_stage = {
+      ...u_stage,
+      Location: info.newLocation
+    };
+  }
+  if (isNotEmpty(info.newDay)) {
+    u_stage = {
+      ...u_stage,
+      Day: info.newDay
+    };
+  }
+  if (isNotEmpty(info.newImg)) {
+    u_stage = {
+      ...u_stage,
+      Img: info.newImg
+    };
+  }
+  if (isNotEmpty(info.newstartTime)) {
+    u_stage = {
+      ...u_stage,
+      startTime: info.newstartTime
+    };
+  }
 
   // update the stage
-  Stage.updateOne({Name: oldStageName},{"$set": u_stage},function(err){
-    if(err) console.log(err);
+  Stage.updateOne({
+    Name: oldStageName
+  }, {
+    "$set": u_stage
+  }, function(err) {
+    if (err) console.log(err);
     else console.log('Stage ' + info.NameToUpdate + ' updated');
   });
 
   res.redirect("/updatestage");
 
 });
-app.post("/deletestage",function(req,res){
+app.post("/deletestage", function(req, res) {
   let info = req.body;
   let stage_to_delete = info.Name;
   let entered_pass = info.Passcode;
@@ -167,21 +228,22 @@ app.post("/deletestage",function(req,res){
   let yuval_pass = 1924;
 
   // check for permission
-  if(entered_pass==ofry_pass || entered_pass==yuval_pass){
+  if (entered_pass == ofry_pass || entered_pass == yuval_pass) {
     // delete the stage
-    Stage.deleteOne({Name: info.Name}, function(err){
-      if(err) console.log(err)
+    Stage.deleteOne({
+      Name: info.Name
+    }, function(err) {
+      if (err) console.log(err)
       else console.log('Stage ' + info.Name + ' deleted');
     });
     res.redirect("/deletestage");
-  }
-  else{
+  } else {
     res.redirect("/deletestage");
   }
 });
 
 
 // listening to a dinamic port (for using heroku) and on our localhost at port 3000
-app.listen(process.env.PORT || 3000,function(){
+app.listen(process.env.PORT || 3000, function() {
   console.log("Server is running on port 3000");
 });
