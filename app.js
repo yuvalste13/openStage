@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 var $ = require("jquery");
 const lodash = require("lodash");
 const app = express();
+const stagesDB = require(__dirname + '/stages.js');
 var fs = require('fs');
 app.set('view engine', 'ejs');
 app.use(express.static("public"))
@@ -12,7 +13,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 const mongoose = require('mongoose');
 
 
-mongoose.connect('mongodb+srv://admin-ofry:OfrY218790@stagecluster.8sdmq.mongodb.net/stagesDB');
+mongoose.connect(stagesDB.stages);
 
 function isNotEmpty(str){
   if(str == ''){
