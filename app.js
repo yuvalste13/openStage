@@ -40,6 +40,7 @@ const stageSchema = new mongoose.Schema({
     type: String
   },
   Day: String,
+  Description: String,
   startTime: {
     type: String
   },
@@ -55,12 +56,9 @@ const stageSchema = new mongoose.Schema({
 });
 const Stage = mongoose.model('Stage',stageSchema);
 
-// stageList contains all the javascript objects for the known stages
-// the info comes from the stages.json file
-let stageList = [];
-// console.table(stageList);
+
 let CityList = ["Ashdod","Ashkelon"];
-// CityList = stages.CityList(stageList);
+
 
 
 app.get("/",function(req,res){
@@ -78,7 +76,6 @@ app.get("/",function(req,res){
 app.get("/stages/:stageName",function(req,res){
   //listening for a /stages/:stageName for sending the stages info
   const requestedTitle = lodash.lowerCase(req.params.stageName);
-  console.log(requestedTitle);
   Stage.find(function(err,stages){
     if(err){
       console.log(err);
@@ -86,7 +83,7 @@ app.get("/stages/:stageName",function(req,res){
     }
     else{
       stages.forEach(function(stage){
-        if(stage.Name == requestedTitle){
+        if(lodash.lowerCase(stage.Name) == requestedTitle){
             res.render("selection",{Stage: stage});
         }
       })
