@@ -6,7 +6,7 @@ var $ = require("jquery");
 const lodash = require("lodash");
 const app = express();
 const stagesDB = require(__dirname + '/stages.js');
-const geocoder = require(__dirname + '/geocoder.js');
+// const geocoder = require(__dirname + '/geocoder.js');
 var fs = require('fs');
 app.set('view engine', 'ejs');
 app.use(express.static("public"))
@@ -88,7 +88,7 @@ app.get("/stages/:stageName",function(req,res){
   let coord;
   let weaterData;
   let query = 'London';
-  const apiKey = "c0d8f4929cdcdf553d6e9298178ae058"
+  const apiKey = stagesDB.weatherAPI;
   const units = "metric"
   const url = "https://api.openweathermap.org/data/2.5/weather?q=" + query + "&appid=" + apiKey + "&units=" + units;
 
