@@ -40,6 +40,20 @@ const stageSchema = new mongoose.Schema({
   Location: {
     type: String
   },
+  Address: {
+    City: {
+      type: String,
+      required: [true, 'No city given']
+    },
+    Street: {
+      type: String,
+      required: [true, 'No street given']
+    },
+    Number: {
+      type: String,
+      required: [true, 'No street number given']
+    }
+  },
   Img: {
     type: String
   },
@@ -57,40 +71,33 @@ const stageSchema = new mongoose.Schema({
 
 });
 const Stage = mongoose.model('Stage', stageSchema);
-
-
 let CityList = ["Ashdod", "Ashkelon"];
 
 
 
 app.get("/", function(req, res) {
-
-
-
+  const title = 'Home';
   Stage.find(function(err, stages) {
     if (err) {
       console.log(err);
     } else {
       res.render("index", {
         CityList: CityList,
-        StageList: stages
+        StageList: stages, Title: title
       });
     }
 
   });
 });
-
-
-
-
 app.get("/stages/:stageName",function(req,res){
+
   const requestedTitle = lodash.lowerCase(req.params.stageName);
   let coord;
   let weaterData;
-  let query = 'London';
-  const apiKey = "c0d8f4929cdcdf553d6e9298178ae058"
+  let query;
+  const apiKey = stagesDB.weaterAPI;
   const units = "metric"
-  const url = "https://api.openweathermap.org/data/2.5/weather?q=" + query + "&appid=" + apiKey + "&units=" + units;
+
 
   Stage.find(function(err,stages){
     if(err){console.log(err);
@@ -98,11 +105,16 @@ app.get("/stages/:stageName",function(req,res){
     else{
       stages.forEach(function(stage){
         if (lodash.lowerCase(stage.Name) == requestedTitle){
+          query = stage.Address.City + ',' + stage.Address.Steet + ' ' + stage.Address.Number;
+          console.log(query);
+          const url = "https://api.openweathermap.org/data/2.5/weather?q=" + query + "&appid=" + apiKey + "&units=" + units;
           https.get(url , function(response){
             response.on("data",function(data){
               weaterData = JSON.parse(data);
               coord = weaterData.coord;
-              res.render("selection",{Stage: stage, Coord: coord});
+              console.log(coord);
+              const title = stage.Name;
+              res.render("selection",{Stage: stage, Coord: coord, Title: title});
             })
 
           });
@@ -111,24 +123,19 @@ app.get("/stages/:stageName",function(req,res){
     }
   });
 
-
-
 });
-
-
-
-
 app.get("/rank", function(req, res) {
-  res.render("rank");
+  res.render("rank",{Title: 'Rank'});
 })
 app.get("/:topic", function(req, res) {
   const requestedTitle = lodash.lowerCase(req.params.topic);
+  const title = requestedTitle;
   Stage.find(function(err, stages) {
     if (err) {
       console.log(err);
     } else {
       res.render(requestedTitle, {
-        Stages: stages
+        Stages: stages, Title: title
       });
     }
   })
@@ -158,7 +165,12 @@ app.post("/addstage", function(req, res) {
   let info = req.body;
   let new_stage = new Stage({
     Name: info.Name,
-    Location: info.Location,
+    Location: info.City,
+    Address: {
+      City: info.City,
+      Street: info.Street,
+      Number: info.Number
+    },
     Day: info.Day,
     startTime: info.startTime,
     rank: 0,
@@ -173,7 +185,7 @@ app.post("/updatestage", function(req, res) {
   let info = req.body;
   let u_stage = {};
   let oldStageName = info.NameToUpdate;
-  let new_values = [info.newName, info.newLocation, info.newDay, info.newImg, info.newstartTime];
+  let new_values = [info.newName,info.newCity,info.newStreet,info.newNumber, info.newDay, info.newImg, info.newstartTime];
 
   // checking is one of the given values is empty. if it does, dont add them
   if (isNotEmpty(info.newName)) {
@@ -182,10 +194,15 @@ app.post("/updatestage", function(req, res) {
       Name: info.newName
     };
   }
-  if (isNotEmpty(info.newName)) {
+  if (isNotEmpty(info.newCity) && isNotEmpty(info.newStreet) && isNotEmpty(info.newNumber)) {
     u_stage = {
       ...u_stage,
-      Location: info.newLocation
+      Location: info.newLocation,
+      Address: {
+        City: info.newCity,
+        Street: info.newStreet,
+        Number: info.newNumber
+      }
     };
   }
   if (isNotEmpty(info.newDay)) {
