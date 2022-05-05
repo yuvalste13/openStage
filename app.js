@@ -24,6 +24,7 @@ function isNotEmpty(str) {
   }
   return true;
 }
+
 const stageSchema = new mongoose.Schema({
   Name: {
     type: String,
@@ -54,6 +55,7 @@ const stageSchema = new mongoose.Schema({
       required: [true, 'No street number given']
     }
   },
+  Phone: String,
   Img: {
     type: String
   },
@@ -67,6 +69,7 @@ const stageSchema = new mongoose.Schema({
     commentBody: String,
     Date: Date
   }]
+
 
 
 });
@@ -106,13 +109,11 @@ app.get("/stages/:stageName",function(req,res){
       stages.forEach(function(stage){
         if (lodash.lowerCase(stage.Name) == requestedTitle){
           query = stage.Address.City + ',' + stage.Address.Steet + ' ' + stage.Address.Number;
-          console.log(query);
           const url = "https://api.openweathermap.org/data/2.5/weather?q=" + query + "&appid=" + apiKey + "&units=" + units;
           https.get(url , function(response){
             response.on("data",function(data){
               weaterData = JSON.parse(data);
               coord = weaterData.coord;
-              console.log(coord);
               const title = stage.Name;
               res.render("selection",{Stage: stage, Coord: coord, Title: title});
             })
@@ -175,7 +176,8 @@ app.post("/addstage", function(req, res) {
     startTime: info.startTime,
     rank: 0,
     rev: 0,
-    Img: info.Img
+    Img: info.Img,
+    Phone: info.Phone
   });
   new_stage.save();
 
@@ -185,7 +187,7 @@ app.post("/updatestage", function(req, res) {
   let info = req.body;
   let u_stage = {};
   let oldStageName = info.NameToUpdate;
-  let new_values = [info.newName,info.newCity,info.newStreet,info.newNumber, info.newDay, info.newImg, info.newstartTime];
+  let new_values = [info.newName,info.newCity,info.newStreet,info.newNumber, info.newDay, info.newImg, info.newstartTime,info.newPhone];
 
   // checking is one of the given values is empty. if it does, dont add them
   if (isNotEmpty(info.newName)) {
@@ -223,6 +225,12 @@ app.post("/updatestage", function(req, res) {
       startTime: info.newstartTime
     };
   }
+  if(isNotEmpty(info.newPhone)){
+    u_stage = {
+      ...u_stage,
+      Phone: info.newPhone
+    }
+  }
 
   // update the stage
   Stage.updateOne({
@@ -257,6 +265,10 @@ app.post("/deletestage", function(req, res) {
   } else {
     res.redirect("/deletestage");
   }
+});
+app.post("/comment",function(req,res){
+  let info = req.body;
+
 });
 
 
