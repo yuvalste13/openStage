@@ -14,10 +14,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 const mongoose = require('mongoose');
-
-
 mongoose.connect(stagesDB.stages);
-
 function isNotEmpty(str) {
   if (str == '') {
     return false;
@@ -41,6 +38,10 @@ const stageSchema = new mongoose.Schema({
   Location: {
     type: String
   },
+  Coord:{
+    Lon: Number,
+    Lat: Number
+  },
   Address: {
     City: {
       type: String,
@@ -53,7 +54,7 @@ const stageSchema = new mongoose.Schema({
     Number: {
       type: String,
       required: [true, 'No street number given']
-    }
+    },
   },
   Phone: String,
   Img: {
@@ -64,7 +65,7 @@ const stageSchema = new mongoose.Schema({
   startTime: {
     type: String
   },
-  comments: [{
+  Comments: [{
     Name: String,
     commentBody: String,
     Date: Date
@@ -75,8 +76,6 @@ const stageSchema = new mongoose.Schema({
 });
 const Stage = mongoose.model('Stage', stageSchema);
 let CityList = ["Ashdod", "Ashkelon"];
-
-
 
 app.get("/", function(req, res) {
   const title = 'Home';
@@ -99,7 +98,10 @@ app.get("/stages/:stageName",function(req,res){
   let weaterData;
   let query;
   const apiKey = stagesDB.weaterAPI;
-  const units = "metric"
+  const units = "metric";
+
+
+
 
 
   Stage.find(function(err,stages){
@@ -108,17 +110,8 @@ app.get("/stages/:stageName",function(req,res){
     else{
       stages.forEach(function(stage){
         if (lodash.lowerCase(stage.Name) == requestedTitle){
-          query = stage.Address.City + ',' + stage.Address.Steet + ' ' + stage.Address.Number;
-          const url = "https://api.openweathermap.org/data/2.5/weather?q=" + query + "&appid=" + apiKey + "&units=" + units;
-          https.get(url , function(response){
-            response.on("data",function(data){
-              weaterData = JSON.parse(data);
-              coord = weaterData.coord;
-              const title = stage.Name;
-              res.render("selection",{Stage: stage, Coord: coord, Title: title});
-            })
-
-          });
+          const title = stage.Name;
+          res.render("selection",{Stage: stage, Title: title});
         }
       })
     }
@@ -143,7 +136,6 @@ app.get("/:topic", function(req, res) {
 
 });
 
-
 app.post("/rank", function(req, res) {
   let info = req.body;
   Stage.updateOne({
@@ -164,30 +156,48 @@ app.post("/rank", function(req, res) {
 });
 app.post("/addstage", function(req, res) {
   let info = req.body;
-  let new_stage = new Stage({
-    Name: info.Name,
-    Location: info.City,
-    Address: {
-      City: info.City,
-      Street: info.Street,
-      Number: info.Number
-    },
-    Day: info.Day,
-    startTime: info.startTime,
-    rank: 0,
-    rev: 0,
-    Img: info.Img,
-    Phone: info.Phone
-  });
-  new_stage.save();
+  let coord;
+  let weaterData;
+  let query;
+  const apiKey = stagesDB.weaterAPI;
+  const units = "metric";
+  query = info.City + ',' + info.Street + ' ' + info.Number;
+  const url = "https://api.openweathermap.org/data/2.5/weather?q=" + query + "&appid=" + apiKey + "&units=" + units;
 
+  https.get(url,function(response){
+    response.on("data",function(data){
+      weaterData = JSON.parse(data);
+      coord = weaterData.coord;
+      let new_stage = new Stage({
+        Name: info.Name,
+        Location: info.City,
+        Address: {
+          City: info.City,
+          Street: info.Street,
+          Number: info.Number
+        },
+        Day: info.Day,
+        startTime: info.startTime,
+        rank: 0,
+        rev: 0,
+        Img: info.Img,
+        Phone: info.Phone,
+        Coord:{
+          Lon: coord.lon,
+          Lat: coord.lat
+        }
+      });
+      new_stage.save();
+    })
+  });
   res.redirect("/addstage");
+
 });
 app.post("/updatestage", function(req, res) {
   let info = req.body;
   let u_stage = {};
   let oldStageName = info.NameToUpdate;
-  let new_values = [info.newName,info.newCity,info.newStreet,info.newNumber, info.newDay, info.newImg, info.newstartTime,info.newPhone];
+  // let new_values = [info.newName,info.newCity,info.newStreet,info.newNumber, info.newDay, info.newImg, info.newstartTime,info.newPhone,info.newLat,info.newLon];
 
   // checking is one of the given values is empty. if it does, dont add them
   if (isNotEmpty(info.newName)) {
@@ -231,6 +241,15 @@ app.post("/updatestage", function(req, res) {
       Phone: info.newPhone
     }
   }
+  if(isNotEmpty(info.newLat) && isNotEmpty(info.newLon)){
+    u_stage = {
+      ...u_stage,
+      Coord:{
+        Lat: Number(info.newLat),
+        Lon: Number(info.newLon)
+      }
+    }
+  }
 
   // update the stage
   Stage.updateOne({
@@ -240,6 +259,7 @@ app.post("/updatestage", function(req, res) {
   }, function(err) {
     if (err) console.log(err);
     else console.log('Stage ' + info.NameToUpdate + ' updated');
+    console.log(u_stage);
   });
 
   res.redirect("/updatestage");
@@ -270,7 +290,6 @@ app.post("/comment",function(req,res){
   let info = req.body;
 
 });
-
 
 // listening to a dinamic port (for using heroku) and on our localhost at port 3000
 app.listen(process.env.PORT || 3000, function() {

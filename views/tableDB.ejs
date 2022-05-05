@@ -19,7 +19,8 @@
     <tr>
       <td scope="row"><%= Stages[i]._id %></td>
       <td><%= Stages[i].Name %></td>
-      <td><%= Stages[i].Address.City %> , <%= Stages[i].Address.Street%> <%= Stages[i].Address.Number%></td>
+      <td><%= Stages[i].Address.City %> , <%= Stages[i].Address.Street%> <%= Stages[i].Address.Number%>
+    (<%= Stages[i].Coord.Lat %>,<%= Stages[i].Coord.Lon %>)</td>
       <td><%= Stages[i].Day %></td>
       <td><%= Stages[i].startTime %></td>
       <td><%= Stages[i].Img %></td>
